@@ -29,8 +29,12 @@ const App: () => React$Node = () => {
       <AppContext.Provider value={contextState}>
         <NavigationContainer>
           <Stack.Navigator>
-            <Stack.Screen name="Top Headlines" component={TopHeadlines} />
-            <Stack.Screen name="Headline Detail" component={HeadlineDetail} />
+            <Stack.Screen name="Headlines" component={TopHeadlines} />
+            <Stack.Screen
+              name="Headline Detail"
+              component={HeadlineDetail}
+              options={{ title: selectedArticle?.source.name }}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </AppContext.Provider>
