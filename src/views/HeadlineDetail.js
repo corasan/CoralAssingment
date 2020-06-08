@@ -1,35 +1,44 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import useAppContext from '../hooks/useAppContext';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useSafeArea } from 'react-native-safe-area-context';
+import ArticleWebview from '../components/ArticleWebview';
 
 export default function HeadlineDetail() {
   const { selectedArticle } = useAppContext();
   const { bottom } = useSafeArea();
+  const ref = useRef();
 
   return (
-    <View style={[styles.container, { paddingBottom: bottom }]}>
-      <Image
-        source={{ uri: selectedArticle?.urlToImage }}
-        style={styles.image}
-        resizeMode="cover"
-      />
+    <>
+      <View style={[styles.container, { paddingBottom: bottom }]}>
+        <Image
+          source={{ uri: selectedArticle?.urlToImage }}
+          style={styles.image}
+          resizeMode="cover"
+        />
 
-      <View style={styles.content}>
-        <View>
-          <Text style={styles.title}>{selectedArticle?.title}</Text>
-          <Text style={styles.description}>{selectedArticle?.description}</Text>
-          <Text style={styles.author}>{selectedArticle?.author}</Text>
-        </View>
-
-        <TouchableOpacity style={styles.btnContainer}>
-          <View style={styles.btn}>
-            <Text style={styles.btnText}>READ MORE</Text>
+        <View style={styles.content}>
+          <View>
+            <Text style={styles.title}>{selectedArticle?.title}</Text>
+            <Text style={styles.description}>
+              {selectedArticle?.description}
+            </Text>
+            <Text style={styles.author}>{selectedArticle?.author}</Text>
           </View>
-        </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.btnContainer}
+            onPress={() => ref.current.open()}>
+            <View style={styles.btn}>
+              <Text style={styles.btnText}>READ MORE</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+      <ArticleWebview ref={ref} uri={selectedArticle?.url} />
+    </>
   );
 }
 
