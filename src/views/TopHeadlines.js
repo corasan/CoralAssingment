@@ -28,7 +28,7 @@ export default function TopHeadlines() {
 
   const goToDetailView = (article) => {
     setSelectedArticle(article);
-    navigate('Headline Detail');
+    navigate('HeadlineDetail');
   };
 
   return (

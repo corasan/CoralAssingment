@@ -31,7 +31,7 @@ const App: () => React$Node = () => {
           <Stack.Navigator>
             <Stack.Screen name="Headlines" component={TopHeadlines} />
             <Stack.Screen
-              name="Headline Detail"
+              name="HeadlineDetail"
               component={HeadlineDetail}
               options={{ title: selectedArticle?.source.name }}
             />
